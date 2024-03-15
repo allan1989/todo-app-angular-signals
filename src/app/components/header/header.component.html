@@ -1,0 +1,13 @@
+<header class="header">
+  <h1 class="header_title">todos</h1>
+  <div class="header_input-wrapper">
+    <input class="header_checkbox" type="checkbox" />
+    <input
+      class="header_input"
+      type="text"
+      placeholder="What needs to be done?"
+      [value]="searchTerm()"
+      (keyup.enter)="onAddTodo($event)"
+    />
+  </div>
+</header>
