@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 
 @Component({
@@ -10,11 +10,10 @@ import { TodoService } from '../../services/todo.service';
 })
 export class HeaderComponent {
   private todoService = inject(TodoService);
-  public searchTerm = signal<string | null>(null);
+  @ViewChild('inputRef') inputRef!: ElementRef;
 
   onAddTodo($event: Event) {
     this.todoService.addTodo(($event?.target as HTMLInputElement).value);
-    this.searchTerm.set(' ');
-    // todo... reset field after submitting
+    this.inputRef.nativeElement.value = '';
   }
 }
