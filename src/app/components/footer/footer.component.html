@@ -1,13 +1,27 @@
-@if(todos().length > 0) {
-  <footer class="footer">
-    <div class="footer_infos-wrapper">
-      <span>0 items left</span>
-      <div>
-        <button class="footer_button">All</button>
-        <button class="footer_button">Active</button>
-        <button class="footer_button">Completed</button>
-      </div>
-      <button class="footer_button">Clear completed</button>
+@if(filteredTodos().length > 0) {
+<footer class="footer">
+  <div class="footer_infos-wrapper">
+    @if(undoneTodos() > 1 || undoneTodos() === 0) {
+    <p class="footer_infos-items">{{ undoneTodos() }} items left</p>
+    }@else {
+    <p class="footer_infos-items">{{ undoneTodos() }} item left</p>
+    }
+    <div>
+      <button (click)="onFilterAllTodos()" class="footer_button">All</button>
+      <button (click)="onFilterActiveTodos()" class="footer_button">
+        Active
+      </button>
+      <button (click)="onFilterCompletedTodos()" class="footer_button">
+        Completed
+      </button>
     </div>
-  </footer>
+    <button
+      (click)="onClearCompleted()"
+      [class.visible]="doneTodos() > 0"
+      class="footer_button footer_button-clear"
+    >
+      Clear completed
+    </button>
+  </div>
+</footer>
 }

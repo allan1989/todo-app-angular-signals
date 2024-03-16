@@ -23,4 +23,5 @@ export class AppComponent {
   title = 'Todo App Using Signals !';
   public todoService = inject(TodoService);
   public todos = this.todoService.todos;
+  public filteredTodos = this.todoService.filteredTodos;
 }

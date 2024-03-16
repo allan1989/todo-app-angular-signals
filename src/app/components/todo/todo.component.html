@@ -1,5 +1,12 @@
-<li class="todo_list-item">
-    <input class="todo_list-item-checkbox" type="checkbox"/> 
-    <p class="todo_list-item-body">{{ body }}</p>
-    <button (click)="onDeleteTodo(id)" class="todo_list-item-delete-button">X</button>
+<li class="todo_list-item" [class.selected]="todo.completed">
+  <input
+    [(ngModel)]="todo.completed"
+    (click)="onTodoToggle(todo.id)"
+    class="todo_list-item-checkbox"
+    type="checkbox"
+  />
+  <p class="todo_list-item-body">{{ todo.body }}</p>
+  <button (click)="onDeleteTodo(todo)" class="todo_list-item-delete-button">
+    X
+  </button>
 </li>

@@ -6,9 +6,27 @@ import { TodoService } from '../../services/todo.service';
   standalone: true,
   imports: [],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
   public todoService = inject(TodoService);
-  public todos = this.todoService.todos;
+  public filteredTodos = this.todoService.filteredTodos;
+  public undoneTodos = this.todoService.undoneTodos;
+  public doneTodos = this.todoService.doneTodos;
+
+  onClearCompleted() {
+    this.todoService.clearCompleted();
+  }
+
+  onFilterAllTodos() {
+    this.todoService.filterAllTodos();
+  }
+
+  onFilterActiveTodos() {
+    this.todoService.filterActiveTodos();
+  }
+
+  onFilterCompletedTodos() {
+    this.todoService.filterCompletedTodos();
+  }
 }

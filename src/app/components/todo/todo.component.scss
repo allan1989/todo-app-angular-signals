@@ -12,6 +12,13 @@
   word-break: break-all;
   min-height: 65px;
 
+  &.selected & {
+    &-body {
+      color: #949494;
+      text-decoration: line-through;
+    }
+  }
+
   &-checkbox {
     margin: 0 12px;
     position: absolute;

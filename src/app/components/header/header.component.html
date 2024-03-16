@@ -1,7 +1,7 @@
 <header class="header">
   <h1 class="header_title">todos</h1>
   <div class="header_input-wrapper">
-    <input class="header_checkbox" type="checkbox" />
+    <input [class.visible]="hasTodos() > 0" [ngModel]="allSelected()" (click)="toggleAll($event)" class="header_checkbox" type="checkbox" />
     <input
       #inputRef
       class="header_input"

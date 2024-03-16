@@ -25,6 +25,10 @@
     z-index: 1;
   }
 
+  &_infos-items {
+    min-width: 80px;
+  }
+
   &_button {
     border: 1px solid transparent;
     border-radius: 3px;
@@ -33,6 +37,14 @@
     margin: 3px;
     padding: 3px 7px;
     text-decoration: none;
+
+    &-clear {
+      visibility: hidden;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
 
     &:hover {
       border-color: #ce4646;
