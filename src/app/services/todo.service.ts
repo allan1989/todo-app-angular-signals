@@ -100,6 +100,15 @@ export class TodoService {
     }
   }
 
+  modifyTodo(newBody: string, newId: string) {
+    this.todos.update((prev) =>
+      prev.map((todo) =>
+        todo.id === newId ? { ...todo, body: newBody } : todo
+      )
+    );
+    this.filteredTodos.set(this.todos());
+  }
+
   uuidv4() {
     return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c: any) =>
       (

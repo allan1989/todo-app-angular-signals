@@ -11,6 +11,7 @@ import { TodoService } from '../../services/todo.service';
 export class FooterComponent {
   public todoService = inject(TodoService);
   public filteredTodos = this.todoService.filteredTodos;
+  public todos = this.todoService.todos;
   public undoneTodos = this.todoService.undoneTodos;
   public doneTodos = this.todoService.doneTodos;
 

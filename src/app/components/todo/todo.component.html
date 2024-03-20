@@ -5,7 +5,7 @@
     class="todo_list-item-checkbox"
     type="checkbox"
   />
-  <p class="todo_list-item-body">{{ todo.body }}</p>
+  <p appEdit [todo]="todo" class="todo_list-item-body" contenteditable="false">{{ todo.body }}</p>
   <button (click)="onDeleteTodo(todo)" class="todo_list-item-delete-button">
     X
   </button>
