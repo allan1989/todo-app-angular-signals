@@ -7,11 +7,11 @@
     <p class="footer_infos-items">{{ undoneTodos() }} item left</p>
     }
     <div>
-      <button (click)="onFilterAllTodos()" class="footer_button">All</button>
-      <button (click)="onFilterActiveTodos()" class="footer_button">
+      <button (click)="onFilterAllTodos()" id='button-all-todos' class="footer_button">All</button>
+      <button (click)="onFilterActiveTodos()" id='button-active-todos' class="footer_button">
         Active
       </button>
-      <button (click)="onFilterCompletedTodos()" class="footer_button">
+      <button (click)="onFilterCompletedTodos()" id='button-completed-todos' class="footer_button">
         Completed
       </button>
     </div>
