@@ -13,10 +13,10 @@ import { TodoService } from '../services/todo.service';
   standalone: true,
 })
 export class EditDirective {
-  private todoService = inject(TodoService);
+  public todoService = inject(TodoService);
   @Input({ required: true }) todo!: ITodo;
   @HostListener('dblclick')
-  private modifyTodo() {
+  public modifyTodo() {
     this.el.nativeElement.setAttribute('contenteditable', true);
   }
 
