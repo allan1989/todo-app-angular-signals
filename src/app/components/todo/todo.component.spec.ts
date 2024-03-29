@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TodoComponent } from './todo.component';
 import { TodoService } from '../../services/todo.service';
 import { By } from '@angular/platform-browser';
+import { EditDirective } from '../../directives/edit.directive';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -65,5 +66,39 @@ describe('TodoComponent', () => {
     const targetDOM = fixture.debugElement.query(By.css('.todo_list-item-body'))
       .nativeElement.textContent;
     expect(targetDOM).toEqual('lorem');
+  });
+
+  describe('Edit Directive', () => {
+    let targetDOM: any;
+    beforeEach(() => {
+      targetDOM = fixture.debugElement.query(By.css('.todo_list-item-body'));
+    });
+
+    it('sets the attribute contenteditable on double click', () => {
+      targetDOM.triggerEventHandler('dblclick');
+      expect(targetDOM.nativeElement.getAttribute('contenteditable')).toBe(
+        'true'
+      );
+    });
+
+    it('modifies todo if there is content', () => {
+      const spy1 = spyOn(service, 'modifyTodo');
+      targetDOM.triggerEventHandler('focusout', {
+        currentTarget: {
+          textContent: 'toto',
+        },
+      });
+      expect(spy1).toHaveBeenCalled();
+    });
+
+    it('deletes todo if there is no content', () => {
+      const spy1 = spyOn(service, 'deleteTodo');
+      targetDOM.triggerEventHandler('focusout', {
+        currentTarget: {
+          textContent: '',
+        },
+      });
+      expect(spy1).toHaveBeenCalled();
+    });
   });
 });
