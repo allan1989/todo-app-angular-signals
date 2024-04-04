@@ -1,17 +1,29 @@
 @if(todos().length > 0) {
 <footer class="footer">
   <div class="footer_infos-wrapper">
-    @if(undoneTodos() > 1 || undoneTodos() === 0) {
-    <p class="footer_infos-items">{{ undoneTodos() }} items left</p>
-    }@else {
-    <p class="footer_infos-items">{{ undoneTodos() }} item left</p>
-    }
+    <p class="footer_infos-items">
+      {{ undoneTodos() }} item{{ undoneTodos() !== 1 ? "s" : "" }} left
+    </p>
     <div>
-      <button (click)="onFilterAllTodos()" id='button-all-todos' class="footer_button">All</button>
-      <button (click)="onFilterActiveTodos()" id='button-active-todos' class="footer_button">
+      <button
+        (click)="onFilterAllTodos()"
+        id="button-all-todos"
+        class="footer_button"
+      >
+        All
+      </button>
+      <button
+        (click)="onFilterActiveTodos()"
+        id="button-active-todos"
+        class="footer_button"
+      >
         Active
       </button>
-      <button (click)="onFilterCompletedTodos()" id='button-completed-todos' class="footer_button">
+      <button
+        (click)="onFilterCompletedTodos()"
+        id="button-completed-todos"
+        class="footer_button"
+      >
         Completed
       </button>
     </div>

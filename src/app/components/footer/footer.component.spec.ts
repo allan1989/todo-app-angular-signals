@@ -49,7 +49,7 @@ describe('FooterComponent', () => {
     expect(app.undoneTodos()).toEqual(1);
     const targetDOMElement = fixture.debugElement.query(
       By.css('.footer_infos-items')
-    ).nativeElement.textContent;
+    ).nativeElement.textContent.trim();
     expect(targetDOMElement).toEqual('1 item left');
   });
 
@@ -63,7 +63,7 @@ describe('FooterComponent', () => {
     expect(app.undoneTodos()).toEqual(2);
     const targetDOMElement = fixture.debugElement.query(
       By.css('.footer_infos-items')
-    ).nativeElement.textContent;
+    ).nativeElement.textContent.trim();
     expect(targetDOMElement).toEqual('2 items left');
   });
 
