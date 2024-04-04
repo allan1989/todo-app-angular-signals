@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { TodoService } from './todo.service';
-import { ITodo } from '../models/todos';
+import { Filter, ITodo } from '../models/todos';
 
 describe('TodoService', () => {
   let service: TodoService;
@@ -22,7 +22,7 @@ describe('TodoService', () => {
 
   it('should have default values at 0 and false', () => {
     expect(service.todos().length).toBe(0);
-    expect(service.filteredTodos().length).toBe(0);
+    expect(service.data.length).toBe(0);
     expect(service.hasTodos()).toBe(0);
     expect(service.undoneTodos()).toBe(0);
     expect(service.doneTodos()).toBe(0);
@@ -33,7 +33,6 @@ describe('TodoService', () => {
   it('should add the todo', () => {
     service.addTodo('toto');
     expect(service.todos().length).toBe(1);
-    expect(service.filteredTodos().length).toBe(1);
   });
 
   it('should toggle the todo', () => {
@@ -48,9 +47,7 @@ describe('TodoService', () => {
     service.todos.set(dummyTodos);
     service.toggleAll(true);
     const result = service.todos().every((todo) => todo.completed === true);
-    const result2 = service
-      .filteredTodos()
-      .every((todo) => todo.completed === true);
+    const result2 = service.data().every((todo) => todo.completed === true);
     expect(result).toBe(true);
     expect(result2).toBe(true);
   });
@@ -59,38 +56,20 @@ describe('TodoService', () => {
     service.todos.set(dummyTodos);
     service.clearCompleted();
     expect(service.todos().length).toBe(2);
-    expect(service.filteredTodos().length).toBe(2);
-  });
-
-  it('should invoke method setFilteredTodo', () => {
-    const spy = spyOn(service, 'setFilteredTodos');
-    service.filterAllTodos();
-    expect(spy).toHaveBeenCalled();
+    expect(service.data().length).toBe(2);
   });
 
   it('should filter all active todos', () => {
-    const spy = spyOn(service, 'setFilteredTodos');
+    service.currentFilter.set(Filter.ACTIVE);
     service.todos.set(dummyTodos);
-    const activeTodos = service
-      .todos()
-      .filter((todo) => todo.completed === false);
-    service.filterActiveTodos();
-    expect(spy).toHaveBeenCalledWith(activeTodos);
+    TestBed.flushEffects();
+    expect(service.data().length).toBe(2);
   });
 
   it('should return all completed todos', () => {
-    const spy = spyOn(service, 'setFilteredTodos');
+    service.currentFilter.set(Filter.COMPLETED);
     service.todos.set(dummyTodos);
-    const completedTodos = service
-      .todos()
-      .filter((todo) => todo.completed === true);
-    service.filterCompletedTodos();
-    expect(spy).toHaveBeenCalledWith(completedTodos);
-  });
-
-  it('sets the field filteredTodos with the given argument', () => {
-    service.setFilteredTodos(dummyTodos);
-    expect(service.filteredTodos().length).toBe(3);
+    expect(service.data().length).toBe(1);
   });
 
   it('deletes the todo with the given id', () => {

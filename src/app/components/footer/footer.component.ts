@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
+import { Filter } from '../../models/todos';
 
 @Component({
   selector: 'app-footer',
@@ -19,14 +20,14 @@ export class FooterComponent {
   }
 
   onFilterAllTodos() {
-    this.todoService.filterAllTodos();
+    this.todoService.setFilter(Filter.ALL);
   }
 
   onFilterActiveTodos() {
-    this.todoService.filterActiveTodos();
+       this.todoService.setFilter(Filter.ACTIVE);
   }
 
   onFilterCompletedTodos() {
-    this.todoService.filterCompletedTodos();
+       this.todoService.setFilter(Filter.COMPLETED);
   }
 }

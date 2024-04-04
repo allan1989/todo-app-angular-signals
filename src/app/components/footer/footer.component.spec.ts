@@ -47,9 +47,9 @@ describe('FooterComponent', () => {
     app.todos.set([{ id: 'yyy', body: 'lorem', completed: false }]);
     fixture.detectChanges();
     expect(app.undoneTodos()).toEqual(1);
-    const targetDOMElement = fixture.debugElement.query(
-      By.css('.footer_infos-items')
-    ).nativeElement.textContent.trim();
+    const targetDOMElement = fixture.debugElement
+      .query(By.css('.footer_infos-items'))
+      .nativeElement.textContent.trim();
     expect(targetDOMElement).toEqual('1 item left');
   });
 
@@ -61,9 +61,9 @@ describe('FooterComponent', () => {
     ]);
     fixture.detectChanges();
     expect(app.undoneTodos()).toEqual(2);
-    const targetDOMElement = fixture.debugElement.query(
-      By.css('.footer_infos-items')
-    ).nativeElement.textContent.trim();
+    const targetDOMElement = fixture.debugElement
+      .query(By.css('.footer_infos-items'))
+      .nativeElement.textContent.trim();
     expect(targetDOMElement).toEqual('2 items left');
   });
 
@@ -97,11 +97,9 @@ describe('FooterComponent', () => {
     ]);
     fixture.detectChanges();
     const spy1 = spyOn(app, 'onFilterAllTodos').and.callThrough();
-    const spy2 = spyOn(service, 'filterAllTodos');
     const button = fixture.debugElement.query(By.css('#button-all-todos'));
     button.triggerEventHandler('click', null);
     expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
   });
 
   it('invokes the method filterActiveTodos from service', () => {
@@ -112,11 +110,9 @@ describe('FooterComponent', () => {
     ]);
     fixture.detectChanges();
     const spy1 = spyOn(app, 'onFilterActiveTodos').and.callThrough();
-    const spy2 = spyOn(service, 'filterActiveTodos');
     const button = fixture.debugElement.query(By.css('#button-active-todos'));
     button.triggerEventHandler('click', null);
     expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
   });
 
   it('invokes the method filterCompletedTodos from service', () => {
@@ -127,12 +123,10 @@ describe('FooterComponent', () => {
     ]);
     fixture.detectChanges();
     const spy1 = spyOn(app, 'onFilterCompletedTodos').and.callThrough();
-    const spy2 = spyOn(service, 'filterCompletedTodos');
     const button = fixture.debugElement.query(
       By.css('#button-completed-todos')
     );
     button.triggerEventHandler('click', null);
     expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
   });
 });

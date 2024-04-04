@@ -6,15 +6,26 @@ import {
   signal,
 } from '@angular/core';
 import { ITodo } from '../models/todos';
+import { Filter } from '../models/todos';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
   public todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
-  public filteredTodos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
+  public currentFilter: WritableSignal<string> = signal<string>(Filter.ALL);
   public isToggled: WritableSignal<boolean> = signal<boolean>(false);
   public allSelected: WritableSignal<boolean> = signal<boolean>(false);
+  public data = computed(() => {
+    const todos = this.todos();
+    const currentFilter = this.currentFilter();
+    if (Filter.ACTIVE === currentFilter) {
+      return this.todos().filter((todo) => !todo.completed);
+    } else if (Filter.COMPLETED === currentFilter) {
+      return this.todos().filter((todo) => todo.completed);
+    }
+    return todos;
+  });
   public undoneTodos = computed(
     () => this.todos().filter((todo) => todo.completed === false).length
   );
@@ -48,7 +59,10 @@ export class TodoService {
         { id: id, body: todo, completed: false },
       ]);
     }
-    this.setFilteredTodos(this.todos());
+  }
+
+  setFilter(filter:string) {
+    this.currentFilter.set(filter);
   }
 
   todoToggle(id: string) {
@@ -63,40 +77,17 @@ export class TodoService {
     this.todos.update((prev) =>
       prev.map((todo) => ({ ...todo, completed: isCompleted }))
     );
-    this.setFilteredTodos(this.todos());
   }
 
   clearCompleted() {
     this.todos.update((prev) =>
       prev.filter((todo) => todo.completed === false)
     );
-    this.setFilteredTodos(this.todos());
-  }
-
-  filterAllTodos() {
-    this.setFilteredTodos(this.todos());
-  }
-
-  filterActiveTodos() {
-    const activeTodos = this.todos().filter((todo) => todo.completed === false);
-    this.setFilteredTodos(activeTodos);
-  }
-
-  filterCompletedTodos() {
-    const completedTodos = this.todos().filter(
-      (todo) => todo.completed === true
-    );
-    this.setFilteredTodos(completedTodos);
-  }
-
-  setFilteredTodos(todos: ITodo[]) {
-    this.filteredTodos.set(todos);
   }
 
   deleteTodo(id: string) {
     if (id) {
       this.todos.update((prev) => prev.filter((todo) => todo.id !== id));
-      this.filteredTodos.set(this.todos());
     }
   }
 
@@ -106,7 +97,6 @@ export class TodoService {
         todo.id === newId ? { ...todo, body: newBody } : todo
       )
     );
-    this.filteredTodos.set(this.todos());
   }
 
   uuidv4() {
