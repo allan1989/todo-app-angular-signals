@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { ITodo } from '../../models/todos';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { EditDirective } from '../../directives/edit.directive';
   imports: [FormsModule, EditDirective],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent {
   private todoService = inject(TodoService);

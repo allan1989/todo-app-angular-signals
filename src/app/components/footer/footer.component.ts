@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { Filter } from '../../models/todos';
 
@@ -8,6 +8,7 @@ import { Filter } from '../../models/todos';
   imports: [],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
   public todoService = inject(TodoService);

@@ -1,4 +1,10 @@
-import { Component, inject, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  ViewChild,
+  ElementRef,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { TodoService } from '../../services/todo.service';
 import { FormsModule } from '@angular/forms';
 
@@ -8,6 +14,7 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   private todoService = inject(TodoService);
