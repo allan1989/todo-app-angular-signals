@@ -15,7 +15,6 @@ export class TodoService {
   public todos: WritableSignal<ITodo[]> = signal<ITodo[]>([]);
   public currentFilter: WritableSignal<string> = signal<string>(Filter.ALL);
   public isToggled: WritableSignal<boolean> = signal<boolean>(false);
-  public allSelected: WritableSignal<boolean> = signal<boolean>(false);
   public data = computed(() => {
     const todos = this.todos();
     const currentFilter = this.currentFilter();
@@ -33,23 +32,11 @@ export class TodoService {
     () => this.todos().filter((todo) => todo.completed === true).length
   );
   public hasTodos = computed(() => this.todos().length);
-
-  private e = effect(
-    () => {
-      const todos = this.todos().length;
-      const todosCompleted = this.todos().filter(
-        (todo) => todo.completed
-      ).length;
-      if (this.todos().length === 0) {
-        this.allSelected.set(false);
-      } else {
-        this.allSelected.set(todos === todosCompleted);
-      }
-    },
-    {
-      allowSignalWrites: true,
-    }
-  );
+  public allSelected = computed(() => {
+    const todos = this.todos().length;
+    const todosCompleted = this.todos().filter((todo) => todo.completed).length;
+    return todos > 0 && todos === todosCompleted;
+  });
 
   addTodo(todo: string) {
     const id = this.uuidv4();
@@ -61,7 +48,7 @@ export class TodoService {
     }
   }
 
-  setFilter(filter:string) {
+  setFilter(filter: string) {
     this.currentFilter.set(filter);
   }
 
