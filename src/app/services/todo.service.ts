@@ -1,10 +1,4 @@
-import {
-  Injectable,
-  WritableSignal,
-  computed,
-  effect,
-  signal,
-} from '@angular/core';
+import { Injectable, WritableSignal, computed, signal } from '@angular/core';
 import { ITodo } from '../models/todos';
 import { Filter } from '../models/todos';
 

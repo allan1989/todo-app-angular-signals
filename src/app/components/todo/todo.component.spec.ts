@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TodoComponent } from './todo.component';
 import { TodoService } from '../../services/todo.service';
 import { By } from '@angular/platform-browser';
-import { EditDirective } from '../../directives/edit.directive';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
