@@ -1,11 +1,12 @@
 @if(todos().length > 0) {
-<footer class="footer">
+<footer class="footer" data-test="app-footer">
   <div class="footer_infos-wrapper">
-    <p class="footer_infos-items">
+    <p class="footer_infos-items" data-test="app-footer-todo-count">
       {{ undoneTodos() }} item{{ undoneTodos() !== 1 ? "s" : "" }} left
     </p>
     <div>
       <button
+        data-test="app-filter-all"
         (click)="onFilterAllTodos()"
         id="button-all-todos"
         class="footer_button"
@@ -13,6 +14,7 @@
         All
       </button>
       <button
+        data-test="app-filter-active"
         (click)="onFilterActiveTodos()"
         id="button-active-todos"
         class="footer_button"
@@ -20,6 +22,7 @@
         Active
       </button>
       <button
+        data-test="app-filter-completed"
         (click)="onFilterCompletedTodos()"
         id="button-completed-todos"
         class="footer_button"
@@ -28,6 +31,7 @@
       </button>
     </div>
     <button
+      data-test="app-clear-completed"
       (click)="onClearCompleted()"
       [class.visible]="doneTodos() > 0"
       class="footer_button footer_button-clear"

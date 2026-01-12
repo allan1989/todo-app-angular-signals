@@ -1,14 +1,29 @@
-<li class="todo_list-item" [class.selected]="todo.completed">
+<li
+  class="todo_list-item"
+  [class.selected]="todo.completed"
+  data-test="app-todo-item"
+>
   <input
+    data-test="app-todo-item-input"
     [(ngModel)]="todo.completed"
     (click)="onTodoToggle(todo.id)"
     class="todo_list-item-checkbox"
     type="checkbox"
   />
-  <p appEdit [todo]="todo" class="todo_list-item-body" contenteditable="false">
+  <p
+    appEdit
+    [todo]="todo"
+    class="todo_list-item-body"
+    contenteditable="false"
+    data-test="app-todo-item-body"
+  >
     {{ todo.body }}
   </p>
-  <button (click)="onDeleteTodo(todo)" class="todo_list-item-delete-button">
+  <button
+    (click)="onDeleteTodo(todo)"
+    class="todo_list-item-delete-button"
+    data-test="app-todo-delete-button"
+  >
     X
   </button>
 </li>
