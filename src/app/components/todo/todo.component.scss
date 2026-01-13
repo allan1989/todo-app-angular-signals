@@ -34,14 +34,7 @@
     user-select: none;
   }
 
-  &:hover & {
-    &-delete-button {
-      display: block;
-    }
-  }
-
   &-delete-button {
-    display: none;
     position: absolute;
     right: 15px;
     top: 50%;
